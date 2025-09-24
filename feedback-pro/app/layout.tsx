@@ -1,26 +1,16 @@
-import type { Metadata } from 'next'
-import { ClerkProvider } from '@clerk/nextjs'
-import { Geist, Geist_Mono } from 'next/font/google'
-
 import './globals.css'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import { ClerkProvider } from '@clerk/nextjs'
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider
-     
-    >
+    <ClerkProvider>
       <html lang="en">
-        <body >
-          {/* Use the Header component here */}
+        <body>
           <Header />
           {children}
-          <Footer/>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>

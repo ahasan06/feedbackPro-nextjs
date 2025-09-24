@@ -8,41 +8,27 @@ import Table from "@/components/Table";
 import { FeedbackForm } from "@/components/FeedbackForm";
 import { calculateFeedbackStats } from "@/utils/feedback";
 
-const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
+// Inline typing avoids PageProps conflict
+const ProjectPage = async ({
+  params,
+}: {
+  params: { projectId: string };
+}) => {
   const { projectId } = params;
+  const projectIdInt = parseInt(projectId);
 
-  if (!projectId) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-gray-700 text-lg">Invalid Project ID</p>
-      </div>
-    );
+  if (isNaN(projectIdInt)) {
+    return <div className="flex min-h-screen items-center justify-center">Invalid Project ID</div>;
   }
 
-  // Fetch project with feedbacks
   const projectList = await db.query.projects.findMany({
-    where: eq(projects.id, parseInt(projectId)),
+    where: eq(projects.id, projectIdInt),
     with: { feedbacks: true },
   });
 
   const project = projectList[0];
   if (!project) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-xl font-semibold text-gray-900">
-            Project Not Found
-          </h2>
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center mt-4 px-3 py-1.5 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700"
-          >
-            <ChevronLeft className="w-4 h-4 mr-1" />
-            Back to Dashboard
-          </Link>
-        </div>
-      </div>
-    );
+    return <div className="flex min-h-screen items-center justify-center">Project Not Found</div>;
   }
 
   const stats = calculateFeedbackStats(project.feedbacks);
@@ -50,20 +36,15 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 min-h-screen">
-      {/* Header */}
       <div className="mb-6 flex items-center">
-        <Link
-          href="/dashboard"
-          className="flex items-center text-sm text-gray-600 hover:text-gray-900"
-        >
+        <Link href="/dashboard" className="flex items-center text-sm text-gray-600 hover:text-gray-900">
           <ChevronLeft className="w-4 h-4 mr-1" />
           Back to Dashboard
         </Link>
       </div>
 
-      {/* Main Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left - Project Info, Stats, Form */}
+        {/* Left Panel */}
         <div className="space-y-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{project.name}</h1>
@@ -71,32 +52,26 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
           </div>
 
           {hasFeedbacks && (
-            <div className="space-y-3">
+            <>
               <div className="flex items-center justify-between bg-white border rounded-lg p-4">
                 <Users className="w-5 h-5 text-indigo-600" />
                 <p className="text-gray-700 text-sm">
-                  Total Feedback:{" "}
-                  <span className="font-semibold">{stats.feedbackCount}</span>
+                  Total Feedback: <span className="font-semibold">{stats.feedbackCount}</span>
                 </p>
               </div>
               <div className="flex items-center justify-between bg-white border rounded-lg p-4">
                 <Star className="w-5 h-5 text-yellow-500" />
                 <p className="text-gray-700 text-sm">
-                  Avg Rating:{" "}
-                  <span className="font-semibold">
-                    {stats.averageRating.toFixed(1)}
-                  </span>
+                  Avg Rating: <span className="font-semibold">{stats.averageRating.toFixed(1)}</span>
                 </p>
               </div>
-            </div>
+            </>
           )}
 
           <div className="bg-white border rounded-lg">
-            <div className="p-4 border-b">
-              <h2 className="text-base font-semibold text-gray-900 flex items-center">
-                <MessageSquare className="w-4 h-4 mr-1" />
-                Submit Feedback
-              </h2>
+            <div className="p-4 border-b flex items-center gap-2">
+              <MessageSquare className="w-4 h-4" />
+              <h2 className="text-base font-semibold text-gray-900">Submit Feedback</h2>
             </div>
             <div className="p-4">
               <FeedbackForm projectId={project.id} />
@@ -104,26 +79,20 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
           </div>
         </div>
 
-        {/* Right - Feedback List */}
+        {/* Right Panel */}
         <div className="lg:col-span-2">
           <div className="bg-white border rounded-lg">
             <div className="p-4 border-b">
-              <h2 className="text-base font-semibold text-gray-900">
-                Recent Feedback
-              </h2>
+              <h2 className="text-base font-semibold text-gray-900">Recent Feedback</h2>
               <p className="text-sm text-gray-600">
-                {hasFeedbacks
-                  ? `${stats.feedbackCount} feedback(s) received`
-                  : "No feedback yet"}
+                {hasFeedbacks ? `${stats.feedbackCount} feedback(s) received` : "No feedback yet"}
               </p>
             </div>
             <div className="p-4">
               {hasFeedbacks ? (
                 <Table data={project.feedbacks} />
               ) : (
-                <p className="text-center text-gray-500 text-sm">
-                  Be the first to share your feedback.
-                </p>
+                <p className="text-center text-gray-500 text-sm">Be the first to share your feedback.</p>
               )}
             </div>
           </div>
