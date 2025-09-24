@@ -28,17 +28,7 @@ function Header() {
                     </SignedOut>
 
                     <SignedIn>
-                        <UserButton 
-                            userProfileMode="navigation" 
-                            appearance={{
-                                elements: {
-                                    userButton: {
-                                        height: '50px',  // Adjust size here
-                                        width: '50px',   // Adjust size here
-                                    }
-                                }
-                            }}
-                        />
+                        <UserButton/>
                     </SignedIn>
                 </div>
             </div>
