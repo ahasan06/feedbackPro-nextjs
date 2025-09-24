@@ -35,6 +35,7 @@ function NewProjBtn() {
                                 <Label htmlFor="name">Name</Label>
                                 <Input
                                     id="name"
+                                    name='name'
                                     placeholder="Your Project name"
                                 />
                             </div>
