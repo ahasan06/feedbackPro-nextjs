@@ -1,7 +1,7 @@
 import React from 'react'
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
-
+import Link from 'next/link'
 function Header() {
     return (
         <header className="p-4 bg-white shadow-md w-full mx-auto">
@@ -9,7 +9,9 @@ function Header() {
             <div className="flex justify-between items-center max-w-screen-xl w-full mx-auto">
                 {/* Left Side: Logo */}
                 <div className="flex items-center">
-                    <Image src="/logo.png" alt="Logo" width={150} height={100}/>
+                    <Link href="/"> 
+                    <Image src="/logo.png" alt="Logo" width={150} height={100}/> 
+                    </Link>
                 </div>
 
                 {/* Right Side: SignIn, SignUp, UserButton */}

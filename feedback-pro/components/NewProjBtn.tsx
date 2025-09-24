@@ -5,7 +5,6 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -13,6 +12,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+
 
 import { createProject } from "@/actions/createProject";
 import SubmitButton from './submitProjectBtn';
@@ -39,16 +39,6 @@ function NewProjBtn() {
                                     placeholder="Your Project name"
                                 />
                             </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="url">URL</Label>
-                                <Input
-                                    id="url"
-                                    name="url"
-                                    placeholder="http://helloworld.com"
-                                />
-                            </div>
-
                             <div className="space-y-2">
                                 <Label htmlFor="description">Description</Label>
                                 <Textarea
@@ -56,7 +46,6 @@ function NewProjBtn() {
                                     name="description"
                                     placeholder="Write a brief description..."
                                     className="min-h-32"
-
                                 />
                             </div>
                             <SubmitButton/>

@@ -11,7 +11,6 @@ export async function createProject(formData: FormData) {
   const project = {
     name: formData.get("name") as string,
     description: formData.get("description") as string,
-    url: formData.get("url") as string,
     userId,
   }
   
