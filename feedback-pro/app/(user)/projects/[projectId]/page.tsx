@@ -49,7 +49,7 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
   const hasFeedbacks = project.feedbacks.length > 0;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 min-h-screen">
       {/* Header */}
       <div className="mb-6 flex items-center">
         <Link

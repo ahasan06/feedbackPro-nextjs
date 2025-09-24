@@ -4,8 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 
 import './globals.css'
 import Header from '@/components/header'
-
-
+import Footer from '@/components/footer'
 
 export default function RootLayout({
   children,
@@ -13,12 +12,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+     
+    >
       <html lang="en">
         <body >
           {/* Use the Header component here */}
-          <Header/>
+          <Header />
           {children}
+          <Footer/>
         </body>
       </html>
     </ClerkProvider>

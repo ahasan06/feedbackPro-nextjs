@@ -19,7 +19,7 @@ export default async function Page() {
     .where(eq(projects.userId, userId));
 
   return (
-    <div className=" mx-auto px-6 py-5">
+    <div className=" mx-auto px-6 py-5 min-h-screen">
       {/* Header Section */}
       <div className="flex items-center justify-between bg-gradient-to-r from-indigo-50 to-white p-6 rounded-2xl shadow-sm mb-10">
         <div>

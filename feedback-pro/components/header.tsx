@@ -23,9 +23,9 @@ function Header() {
                             </button>
                         </SignInButton>
                         <SignUpButton>
-                            <button className="bg-black hover:bg-gray-900 text-white rounded-lg font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                               <button className="bg-black hover:bg-gray-900 text-white rounded-lg font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
                                 Sign Up
-                            </button>
+                              </button>
                         </SignUpButton>
                     </SignedOut>
 
