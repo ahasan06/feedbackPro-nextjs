@@ -14,12 +14,15 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+import { createProject } from "@/actions/createProject";
+import SubmitButton from './submitProjectBtn';
+
 function NewProjBtn() {
     return (
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button className ="cursor-pointer"> <Plus/> Create Project </Button>
+                    <Button className="cursor-pointer"> <Plus /> Create Project </Button>
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
@@ -27,13 +30,12 @@ function NewProjBtn() {
                         <DialogDescription>
                             Create a new project to get started
                         </DialogDescription>
-                        <form className='flex flex-col gap-4 py-4'>
+                        <form className='flex flex-col gap-4 py-4' action={createProject}>
                             <div className="space-y-2">
                                 <Label htmlFor="name">Name</Label>
                                 <Input
                                     id="name"
-                                    placeholder="Your full name"
-
+                                    placeholder="Your Project name"
                                 />
                             </div>
 
@@ -56,12 +58,9 @@ function NewProjBtn() {
 
                                 />
                             </div>
-                            
+                            <SubmitButton/>
                         </form>
                     </DialogHeader>
-                    <DialogFooter className="flex flex-col items-end">
-                        <Button type="submit" >Create Project</Button>
-                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </div>
